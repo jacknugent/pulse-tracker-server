@@ -2,7 +2,6 @@
 const express = require("express");
 const app = express();
 const redisClient = require("./redis-client");
-const fetch = require("node-fetch");
 
 var CronJob = require("cron").CronJob;
 new CronJob(

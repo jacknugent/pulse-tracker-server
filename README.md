@@ -2,6 +2,12 @@
 
 Track the whereabouts of the latest Pulse Bus in Richmond
 
+## Configuration
+
+To run this application, you need to request API key from the [GRTC](http://new.grtcbustracker.com/bustime/updateDeveloper.jsp). Once you have it, add it to a `.env` file, something like:
+
+`GRTC_KEY=<your key>`
+
 ## To Run Local Build
 
 `npm install`

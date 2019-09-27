@@ -1,12 +1,35 @@
 // server.js
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const redisClient = require("./redis-client");
-
+const axios = require("axios");
 var CronJob = require("cron").CronJob;
+
 new CronJob(
   "*/15 * 6-24,0-1 * * *",
   function() {
+    if (!process.env.GRTC_KEY) {
+      console.log("Missing environment variable. Did you add your GRTC_KEY?");
+    }
+
+    axios
+      .get("http://www.grtcbustracker.com/bustime/api/v3/getpredictions", {
+        params: {
+          key: process.env.GRTC_KEY,
+          format: "json",
+          rt: "BRT",
+          stpid: "3503"
+        }
+      })
+      .then(function(response) {
+        // handle success
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      });
     console.log("You will see this message every 15 seconds");
   },
   null,

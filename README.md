@@ -16,3 +16,10 @@ To run this application, you need to request API key from the [GRTC](http://new.
 ## Run Docker Build
 
 `npm run build`
+
+## Testing
+
+At the current state, the project only supports the Scott's Addition Eastbound and Westbound stops, which can be pinged using these URLs, respectively:
+
+- localhost:\<port>/3504
+- localhost:\<port>/3503

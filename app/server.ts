@@ -22,34 +22,34 @@ new CronJob(
           stpid: "3503"
         }
       })
-      .then(function(response) {
+      .then(function(response: any) {
         // handle success
         console.log(response.data);
       })
-      .catch(function(error) {
+      .catch(function(error: Error) {
         // handle error
         console.log(error);
       });
-    console.log("You will see this message every 15 seconds");
+    console.log("You will see this message every 15 secondsss");
   },
   null,
   true,
   "America/New_York"
 );
 
-app.get("/store/:key", async (req, res) => {
+app.get("/store/:key", async (req: any, res: any) => {
   const { key } = req.params;
   const value = req.query;
   await redisClient.setAsync(key, JSON.stringify(value));
   return res.send("Success");
 });
-app.get("/:key", async (req, res) => {
+app.get("/:key", async (req: any, res: any) => {
   const { key } = req.params;
   const rawData = await redisClient.getAsync(key);
   return res.json(JSON.parse(rawData));
 });
 
-app.get("/", (req, res) => {
+app.get("/", (req: any, res: any) => {
   return res.send("Hello world");
 });
 

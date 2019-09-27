@@ -18,5 +18,4 @@ app:
     - REDIS_URL=redis://cache
     - NODE_ENV=development
     - PORT=3000
-  command:
-    sh -c 'npm i && node server.js'
+  command: sh -c 'npm i && npm install -g typescript && tsc && node build/server.js'

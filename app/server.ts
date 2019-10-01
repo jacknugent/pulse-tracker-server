@@ -5,6 +5,8 @@ const app = express();
 const redisClient = require("./redis-client");
 const axios = require("axios");
 const dayjs = require("dayjs");
+var http = require("http").createServer(app);
+var io = require("socket.io")(http);
 
 function parseIntIfInt(numberOrInt: any) {
   return parseInt(numberOrInt) ? parseInt(numberOrInt) : numberOrInt;
@@ -70,6 +72,19 @@ new CronJob(
   true,
   "America/New_York"
 );
+
+io.on("connection", (client: any) => {
+  client.on("subscribeToTimer", (interval: any) => {
+    console.log("client is subscribing to timer with interval ", interval);
+    setInterval(async () => {
+      client.emit("timer", await redisClient.getAsync(3503));
+    }, interval);
+  });
+});
+
+const port = 8000;
+io.listen(port);
+console.log("Socket.io listening on port", port);
 
 // search by bus route number (only 3503 and 3504)
 app.get("/:key", async (req: any, res: any) => {

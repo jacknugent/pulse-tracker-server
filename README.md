@@ -2,6 +2,13 @@
 
 Track the whereabouts of the latest Pulse Bus in Richmond
 
+## Requirements
+
+- `redis-server`: you will need to install redis server.
+- Mac: `brew install redis-server`
+- Linux: `sudo apt-get install redis-server`
+- Windows: The Redis project does not officially support windows so you cannot use local development. You can still build this project in a Docker container using `npm run build`
+
 ## Configuration
 
 To run this application, you need to get an API key by making an account on [GRTC](http://new.grtcbustracker.com/bustime/home.jsp) and requesting for one under `My API`. Once you have it, add it to a `.env` file, something like:

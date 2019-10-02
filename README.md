@@ -6,9 +6,9 @@ Track the whereabouts of the latest Pulse Bus in Richmond
 
 You will need to have redis-server installed to run the application in a dev environment:
 
-- Mac: `brew install redis-server`
-- Linux: `sudo apt-get install redis-server`
-- Windows: The Redis project does not officially support windows so you cannot use local development. You can still build this project in a Docker container using `npm run build`
+- Mac: `brew install redis`
+- Linux: `sudo apt-get install redis`
+- Windows: The Redis project does not officially support windows so you cannot use local development. You can still build this project in a Docker container using `npm run build`.
 
 ## Configuration
 

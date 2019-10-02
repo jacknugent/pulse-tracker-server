@@ -74,10 +74,10 @@ new CronJob(
 );
 
 io.on("connection", (client: any) => {
-  client.on("subscribeToTimer", (interval: any) => {
+  client.on("subscribeToRoute", (route: number, interval: number) => {
     console.log("client is subscribing to timer with interval ", interval);
     setInterval(async () => {
-      client.emit("timer", await redisClient.getAsync(3503));
+      client.emit("estimates", await redisClient.getAsync(route));
     }, interval);
   });
 });

@@ -10,12 +10,12 @@ To run this application, you need to get an API key by making an account on [GRT
 
 ## To Run Local Build
 
-`npm install`
-`npm start`
+- `npm install`
+- `npm start`
 
 ## Run Docker Build
 
-`npm run build`
+- `npm run build`
 
 ## Testing
 

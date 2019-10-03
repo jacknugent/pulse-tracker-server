@@ -5,8 +5,8 @@ const app = express();
 const redisClient = require("./redis-client");
 const axios = require("axios");
 const dayjs = require("dayjs");
-var http = require("http").createServer(app);
-var io = require("socket.io")(http);
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 function parseIntIfInt(numberOrInt: any) {
   return parseInt(numberOrInt) ? parseInt(numberOrInt) : numberOrInt;

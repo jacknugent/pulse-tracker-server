@@ -57,7 +57,9 @@ new CronJob(
   "*/15 * 6-24,0-1 * * *",
   function() {
     if (!process.env.GRTC_KEY) {
-      console.log("Missing environment variable. Did you add your GRTC_KEY?");
+      throw new Error(
+        "Missing environment variable. Did you add your GRTC_KEY?"
+      );
     }
 
     getEstimates("BRT", 3503).then((est: Estimates) => {
@@ -88,9 +90,18 @@ console.log("Socket.io listening on port", port);
 
 // search by bus route number (only 3503 and 3504)
 app.get("/:key", async (req: any, res: any) => {
-  const { key } = req.params;
-  const rawData = await redisClient.getAsync(key);
-  return res.json(JSON.parse(rawData));
+  try {
+    const { key } = req.params;
+    const rawData = await redisClient.getAsync(key);
+    if (!rawData) {
+      return res.json("Route " + key + " not found in the redis cache.");
+    } else {
+      JSON.parse(rawData);
+      return res.json(JSON.parse(rawData));
+    }
+  } catch (e) {
+    return res.json("JSON error", e);
+  }
 });
 
 // test

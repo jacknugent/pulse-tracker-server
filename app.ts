@@ -13,7 +13,9 @@ const io = require("socket.io")(http)
 const CronJob = require("cron").CronJob
 new CronJob(
   "*/15 * 6-24,0-1 * * *",
-  estimateFunctions.fetchEstimates(redisClient),
+  function() {
+    estimateFunctions.fetchEstimates(redisClient)
+  },
   null,
   true,
   "America/New_York"

@@ -7,9 +7,9 @@ module.exports = {
       const { stopNumber } = req.query
       const rawData = await redisClient.getAsync(stopNumber)
       if (!rawData) {
-        res.json("Route " + stopNumber + " not found in the redis cache.")
+        res.send("Route " + stopNumber + " not found in the redis cache.")
       } else {
-        res.json(rawData)
+        res.send(rawData)
       }
     } catch (e) {
       next(e)

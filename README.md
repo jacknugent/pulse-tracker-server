@@ -29,5 +29,5 @@ To run this application, you need to get an API key by making an account on [GRT
 
 At the current state, the project only supports the Scott's Addition Eastbound and Westbound stops, which can be pinged using these URLs, respectively:
 
-- localhost:\<port>/3504
-- localhost:\<port>/3503
+- http://localhost:\<port>/estimates?stopNumber=3503
+- http://localhost:\<port>/estimates?stopNumber=3504

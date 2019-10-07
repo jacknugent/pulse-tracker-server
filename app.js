@@ -21,8 +21,8 @@ new CronJob(
   "America/New_York"
 )
 
-io.on("connection", (client: any) => {
-  client.on("subscribeToRoute", (route: number, interval: number) => {
+io.on("connection", client => {
+  client.on("subscribeToRoute", (route, interval) => {
     console.log("client is subscribing to timer with interval ", interval)
     setInterval(async () => {
       client.emit("estimates", await redisClient.getAsync(route))
@@ -37,7 +37,7 @@ console.log("Socket.io listening on port", port)
 app.use("/estimates", estimateRouter)
 
 // test
-app.get("/", (req: any, res: any) => {
+app.get("/", (req, res) => {
   return res.send("Hello world")
 })
 

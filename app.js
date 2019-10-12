@@ -12,23 +12,25 @@ const io = require("socket.io")(http)
 
 const CronJob = require("cron").CronJob
 new CronJob(
-  "*/15 * 6-24,0-1 * * *",
+  "* * 6-24,0-1 * * *",
   function() {
-    estimateFunctions.fetchEstimates(redisClient)
+    estimateFunctions.fetchEstimates(redisClient, io)
   },
   null,
   true,
   "America/New_York"
 )
 
-io.on("connection", client => {
-  client.on("subscribeToRoute", (route, interval) => {
-    console.log("client is subscribing to timer with interval ", interval)
-    setInterval(async () => {
-      client.emit("estimates", await redisClient.getAsync(route))
-    }, interval)
+io.on("connection", function(client) {
+  // once a client has connected, we expect to get a ping from them saying what room they want to join
+  client.on("route", function(route) {
+    client.join(route)
   })
 })
+
+// setInterval(async () => {
+//   client.emit("estimates", await redisClient.getAsync(route))
+// }, interval)
 
 const port = 8000
 io.listen(port)

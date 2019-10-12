@@ -46,7 +46,7 @@ function parseIntIfInt(numberOrInt) {
   return parseInt(numberOrInt) ? parseInt(numberOrInt) : numberOrInt
 }
 
-function fetchEstimates(redisClient) {
+function fetchEstimates(redisClient, io) {
   if (!process.env.GRTC_KEY) {
     throw new Error("Missing environment variable. Did you add your GRTC_KEY?")
   }
@@ -57,6 +57,12 @@ function fetchEstimates(redisClient) {
 
   getEstimates("BRT", 3504, redisClient).then(est => {
     setEstimates(est, 3504, redisClient)
+  })
+
+  const routes = [3503, 3504]
+
+  routes.forEach(function(route) {
+    io.sockets.in(route.toString()).emit("estimate", route)
   })
 }
 

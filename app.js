@@ -23,8 +23,12 @@ new CronJob(
 
 io.on("connection", function(client) {
   // once a client has connected, we expect to get a ping from them saying what room they want to join
-  client.on("route", function(route) {
+  client.on("room", function(route) {
     client.join(route)
+  })
+
+  client.on("leaveRoom", function(route) {
+    client.leave(route)
   })
 })
 

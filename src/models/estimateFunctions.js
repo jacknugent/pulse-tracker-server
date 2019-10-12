@@ -62,7 +62,7 @@ function fetchEstimates(redisClient, io) {
   const routes = [3503, 3504]
 
   routes.forEach(function(route) {
-    io.sockets.in(route.toString()).emit("estimate", route)
+    io.sockets.in(route).emit("estimate", "hey" + route)
   })
 }
 

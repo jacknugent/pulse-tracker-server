@@ -1,6 +1,6 @@
 const redisClient = require("../redis/redis-client")
 
-// search by bus route number (only 3503 and 3504)
+// search by bus route number (only 3519 and 3504)
 module.exports = {
   getArrivalEstimate: async (req, res, next) => {
     try {

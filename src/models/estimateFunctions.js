@@ -51,15 +51,15 @@ function fetchEstimates(redisClient, io) {
     throw new Error("Missing environment variable. Did you add your GRTC_KEY?")
   }
 
-  getEstimates("BRT", 3503, redisClient).then(est => {
-    setEstimates(est, 3503, redisClient)
+  getEstimates("BRT", 3519, redisClient).then(est => {
+    setEstimates(est, 3519, redisClient)
   })
 
   getEstimates("BRT", 3504, redisClient).then(est => {
     setEstimates(est, 3504, redisClient)
   })
 
-  const routes = [3503, 3504]
+  const routes = [3519, 3504]
 
   routes.forEach(function(route) {
     redisClient

@@ -1,9 +1,6 @@
 // server.js
 const express = require("express")
 const app = express()
-const PORT = process.env.PORT || 3000
-
-const estimateRouter = require("./src/routes/pulseEstimates")
 const estimateFunctions = require("./src/models/estimateFunctions")
 
 const redisClient = require("./src/redis/redis-client")
@@ -38,14 +35,3 @@ io.on("connection", function(client) {
 const port = 8000
 io.listen(port)
 console.log("Socket.io listening on port", port)
-
-app.use("/estimates", estimateRouter)
-
-// test
-app.get("/", (req, res) => {
-  return res.send("Hello world")
-})
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
-})
